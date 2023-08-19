@@ -1,7 +1,7 @@
 import {
   CircleCI,
   Job,
-} from "https://deno.land/x/fluent_circleci@0.1.0/mod.ts";
+} from "https://deno.land/x/fluent_circleci@v0.1.0/mod.ts";
 
 const circleci = new CircleCI();
 
