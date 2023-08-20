@@ -8,6 +8,7 @@ import {
   Step as StepSpec,
   Machine as MachineSpec,
   Workflows as WorkflowsSpec,
+  Environment as EnvironmentSpec,
   ConfigYaml,
   DockerSchema,
   RunSchema,
@@ -16,6 +17,7 @@ import {
   MachineSchema,
   StepSchema,
   WorkflowsSchema,
+  EnvironmentSchema,
   Schema,
 } from "./src/spec.ts";
 
@@ -28,6 +30,7 @@ export {
   StepSchema,
   MachineSchema,
   WorkflowsSchema,
+  EnvironmentSchema,
   Schema,
   Job,
 };
@@ -40,5 +43,6 @@ export type {
   MachineSpec,
   StepSpec,
   WorkflowsSpec,
+  EnvironmentSpec,
   ConfigYaml,
 };

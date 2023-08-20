@@ -4,6 +4,8 @@ export const MachineSchema = z.object({
   image: z.string(),
 });
 
+export const EnvironmentSchema = z.record(z.string());
+
 export const DockerSchema = z.object({
   image: z.string(),
 });
@@ -30,6 +32,7 @@ export const StepSchema = z.union([
 
 export const JobSchema = z.object({
   docker: z.array(DockerSchema).optional(),
+  environment: EnvironmentSchema.optional(),
   machine: MachineSchema.optional(),
   resource_class: z.string().optional(),
   steps: z.array(StepSchema),
@@ -62,5 +65,7 @@ export type Jobs = z.infer<typeof JobsSchema>;
 export type Step = z.infer<typeof StepSchema>;
 
 export type Workflows = z.infer<typeof WorkflowsSchema>;
+
+export type Environment = z.infer<typeof EnvironmentSchema>;
 
 export type ConfigYaml = z.infer<typeof Schema>;
