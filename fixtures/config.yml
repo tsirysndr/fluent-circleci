@@ -3,8 +3,6 @@
 version: 2.1
 jobs:
   build:
-    docker:
-      - image: cimg/node:lts
     steps:
       - checkout
       - setup_remote_docker:
@@ -15,6 +13,8 @@ jobs:
       - run:
           name: Dagger Pipeline
           command: node index.mjs
+    docker:
+      - image: cimg/node:lts
 workflows:
   dagger:
     jobs:
