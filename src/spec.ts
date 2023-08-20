@@ -1,5 +1,9 @@
 import { z } from "https://deno.land/x/zod@v3.22.1/mod.ts";
 
+export const MachineSchema = z.object({
+  image: z.string(),
+});
+
 export const DockerSchema = z.object({
   image: z.string(),
 });
@@ -25,7 +29,9 @@ export const StepSchema = z.union([
 ]);
 
 export const JobSchema = z.object({
-  docker: z.array(DockerSchema),
+  docker: z.array(DockerSchema).optional(),
+  machine: MachineSchema.optional(),
+  resource_class: z.string().optional(),
   steps: z.array(StepSchema),
 });
 
@@ -42,6 +48,8 @@ export const Schema = z.object({
   jobs: JobsSchema,
   workflows: WorkflowsSchema,
 });
+
+export type Machine = z.infer<typeof MachineSchema>;
 
 export type Docker = z.infer<typeof DockerSchema>;
 
