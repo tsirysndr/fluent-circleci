@@ -13,7 +13,6 @@ class Job {
 
   constructor() {
     this.spec = {
-      docker: [],
       steps: [],
     };
   }
