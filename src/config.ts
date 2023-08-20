@@ -37,7 +37,7 @@ class CircleCI {
     )}`;
   }
 
-  save(path: ".circleci/config.yml") {
+  save(path = ".circleci/config.yml") {
     const config = this.toString();
     Deno.writeTextFileSync(path, config);
   }
