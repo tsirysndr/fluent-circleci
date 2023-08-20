@@ -4,6 +4,8 @@ import {
   Step,
   DockerSchema,
   StepSchema,
+  Machine,
+  MachineSchema,
 } from "./spec.ts";
 
 class Job {
@@ -14,6 +16,17 @@ class Job {
       docker: [],
       steps: [],
     };
+  }
+
+  machine(value: Machine): Job {
+    MachineSchema.parse(value);
+    this.spec.machine = value;
+    return this;
+  }
+
+  resourceClass(value: string): Job {
+    this.spec.resource_class = value;
+    return this;
   }
 
   docker(values: Docker[]): Job {
