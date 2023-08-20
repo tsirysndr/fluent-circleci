@@ -6,6 +6,8 @@ import {
   StepSchema,
   Machine,
   MachineSchema,
+  Environment,
+  EnvironmentSchema,
 } from "./spec.ts";
 
 class Job {
@@ -20,6 +22,20 @@ class Job {
   machine(value: Machine): Job {
     MachineSchema.parse(value);
     this.spec.machine = value;
+    return this;
+  }
+
+  variables(value: Environment): Job {
+    EnvironmentSchema.parse(value);
+    this.spec.environment = value;
+    return this;
+  }
+
+  variable(key: string, value: string): Job {
+    if (!this.spec.environment) {
+      this.spec.environment = {};
+    }
+    this.spec.environment[key] = value;
     return this;
   }
 
