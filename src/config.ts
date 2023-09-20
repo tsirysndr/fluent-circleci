@@ -1,4 +1,4 @@
-import { stringify } from "https://esm.sh/v131/yaml@2.3.1";
+import { stringify } from "../deps.ts";
 import { ConfigYaml, Workflows, WorkflowsSchema } from "./spec.ts";
 import Job from "./job.ts";
 

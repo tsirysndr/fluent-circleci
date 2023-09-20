@@ -1,4 +1,4 @@
-import { assertEquals } from "https://deno.land/std@0.191.0/testing/asserts.ts";
+import { assertEquals } from "../deps.ts";
 import CircleCI from "./config.ts";
 import Job from "./job.ts";
 
