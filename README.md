@@ -2,6 +2,7 @@
 
 [![deno module](https://shield.deno.dev/x/fluent_circleci)](https://deno.land/x/fluent_circleci)
 ![deno compatibility](https://shield.deno.dev/deno/^1.34)
+[![](https://jsr.io/badges/@tsirysndr/fluent-circleci)](https://jsr.io/@tsirysndr/fluent-circleci)
 [![](https://img.shields.io/codecov/c/gh/tsirysndr/fluent-circleci)](https://codecov.io/gh/tsirysndr/fluent-circleci)
 
 Fluent CircleCI is a deno module for generating CircleCI configuration files easily and fluently.

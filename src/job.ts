@@ -1,14 +1,15 @@
 import {
-  Job as JobSpec,
-  Docker,
-  Step,
+  type Job as JobSpec,
+  type Docker,
+  type Step,
   DockerSchema,
   StepSchema,
-  Machine,
+  type Machine,
   MachineSchema,
-  Environment,
+  type Environment,
   EnvironmentSchema,
 } from "./spec.ts";
+import { _ } from "../deps.ts";
 
 class Job {
   private spec: JobSpec;
@@ -56,12 +57,76 @@ class Job {
     for (const value of values) {
       StepSchema.parse(value);
     }
-    this.spec.steps = values;
+    this.spec.steps = values.map((value) => {
+      if (typeof (value as { run: string }).run === "string") {
+        return {
+          ...(value as { run: string }),
+          run: (value as { run: string }).run
+            .split("\n")
+            .map((line) => line.trim())
+            .join("\n"),
+        };
+      }
+
+      if (
+        typeof _.get(
+          value as { run: { name: string; command: string } },
+          "run.command"
+        ) === "string"
+      ) {
+        return {
+          ...(value as { run: { name: string; command: string } }),
+          run: {
+            ...(value as { run: { name: string; command: string } }).run,
+            command: (
+              value as { run: { name: string; command: string } }
+            ).run.command
+              .split("\n")
+              .map((line) => line.trim())
+              .join("\n"),
+          },
+        };
+      }
+
+      return value;
+    });
     return this;
   }
 
   step(value: Step): Job {
     StepSchema.parse(value);
+    if (typeof (value as { run: string }).run === "string") {
+      this.spec.steps.push({
+        ...(value as { run: string }),
+        run: (value as { run: string }).run
+          .split("\n")
+          .map((line) => line.trim())
+          .join("\n"),
+      });
+      return this;
+    }
+
+    if (
+      typeof _.get(
+        value as { run: { name: string; command: string } },
+        "run.command"
+      ) === "string"
+    ) {
+      this.spec.steps.push({
+        ...(value as { run: { name: string; command: string } }),
+        run: {
+          ...(value as { run: { name: string; command: string } }).run,
+          command: (
+            value as { run: { name: string; command: string } }
+          ).run.command
+            .split("\n")
+            .map((line) => line.trim())
+            .join("\n"),
+        },
+      });
+      return this;
+    }
+
     this.spec.steps.push(value);
     return this;
   }

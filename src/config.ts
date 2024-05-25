@@ -1,6 +1,6 @@
 import { stringify } from "../deps.ts";
-import { ConfigYaml, Workflows, WorkflowsSchema } from "./spec.ts";
-import Job from "./job.ts";
+import { type ConfigYaml, type Workflows, WorkflowsSchema } from "./spec.ts";
+import type Job from "./job.ts";
 
 class CircleCI {
   private yaml: ConfigYaml;
